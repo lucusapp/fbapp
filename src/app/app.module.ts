@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 
 import { APP_ROUTING } from './app.routes';
@@ -15,6 +15,8 @@ import { SearchComponent } from './components/search/search.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { NamePipe } from './pipes/name.pipe';
 import { ClienteComponent } from './components/cliente/cliente.component';
+import { FooterComponent } from './components/shared/footer/footer.component';
+import { PartnersComponent } from './components/partners/partners.component';
 
 
 
@@ -27,14 +29,15 @@ import { ClienteComponent } from './components/cliente/cliente.component';
     NavbarComponent,
     NamePipe,
     ClienteComponent,
-
-
+    FooterComponent,
+    PartnersComponent,
 
 
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     JsonpModule,
     APP_ROUTING
