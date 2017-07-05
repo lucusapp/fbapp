@@ -5,8 +5,10 @@ import { HttpModule, JsonpModule } from '@angular/http';
 
 import { APP_ROUTING } from './app.routes';
 
+
 //servicios
 import { FacebService } from './services/faceb.service';
+import { ProfileService } from './services/profile.service';
 
 
 import { AppComponent } from './app.component';
@@ -16,10 +18,8 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { NamePipe } from './pipes/name.pipe';
 import { ClienteComponent } from './components/cliente/cliente.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
+import { PartnerComponent } from './components/partners/partner.component';
 import { PartnersComponent } from './components/partners/partners.component';
-
-
-
 
 @NgModule({
   declarations: [
@@ -30,6 +30,7 @@ import { PartnersComponent } from './components/partners/partners.component';
     NamePipe,
     ClienteComponent,
     FooterComponent,
+    PartnerComponent,
     PartnersComponent,
 
 
@@ -43,7 +44,8 @@ import { PartnersComponent } from './components/partners/partners.component';
     APP_ROUTING
   ],
   providers: [
-  FacebService],
+  FacebService,
+  ProfileService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

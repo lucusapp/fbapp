@@ -89,9 +89,9 @@ hr{
 .fadeIn {
   animation-name: fadeIn;
 }
-.img-50{
-  height:50px;
-  width: 50px
+.img-120{
+  height:120px;
+  width: 120px
 }
 .div {
     display: flex;
