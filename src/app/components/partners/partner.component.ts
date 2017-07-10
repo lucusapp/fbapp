@@ -25,6 +25,7 @@ actividad:"",
 direccion:"",
 telefono:"",
 email:"",
+
 };
 
 termino:string = "";
@@ -41,6 +42,7 @@ termino:string = "";
       'direccion': new FormControl (''),
       'email':  new FormControl (''),
       'phone': new FormControl (''),
+      'sector': new FormControl (''),
 
 
 
@@ -74,7 +76,8 @@ ngOnInit() {
             actividad:this.data.about,
             email:this.data.emails[0],
             phone:this.data.phone,
-            picture:this.data.picture.data.url
+            picture:this.data.picture.data.url,
+
           })
         }else{
           console.log('no existe un registro')

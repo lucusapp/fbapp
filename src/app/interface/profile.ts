@@ -4,5 +4,6 @@ export interface Profile{
   direccion:string;
   telefono:string;
   email:string;
+  sector:string;
   key$?:string;
 }
