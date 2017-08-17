@@ -5,7 +5,17 @@ import { Observable } from 'rxjs/Rx';
 import { Profile } from '../../interface/profile';
 import { ProfileService} from '../../services/profile.service';
 import { Router,ActivatedRoute } from '@angular/router';
+import {Http, Headers} from "@angular/http";
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import {AngularFireModule} from 'angularfire2'
 
+
+
+@Component({
+  selector: 'app-partner',
+  templateUrl: './partner.component.html',
+  providers: [FacebService, ProfileService]
+})
 
 @Component({
   selector: 'app-partner',
@@ -20,13 +30,23 @@ forma:FormGroup;
 public data:any = [];
 
 profile:Profile = {
-nombre:"",
-actividad:"",
-direccion:"",
-telefono:"",
-email:"",
+  nombre:'',
+  actividad:'',
+  telefono:'',
+  email:'',
+  key$:'',
+  picture:'',
+  username:'',
+  feed:{
+    title:'',
+    imagen: '',
+    link: '',
+    created_time:'',
+    id:'',
+    description:'',
+    }
 
-};
+  }
 
 termino:string = "";
 
@@ -85,12 +105,23 @@ ngOnInit() {
     };
 
 
-    enviar(){
-      console.log (this.profile);
-      this._profileService.nuevoProfile(this.profile)
-        .subscribe(data=>{
-            this.router.navigate(['/profile', data.name])
-        },
-      error=>console.error(error));
-    }
+  enviar(){
+  let envio= new Promise (function(resolve,reject){
+        setTimeout(()=>{
+          console.log('promesaend')
+          resolve();
+        },1500)
+      })
+this._facebService.getClientes( this.termino )
+  .subscribe(data=>{
+    this.data=data
+    console.log(data)
+  })
+
+
+  envio.then(()=>{
+    this._profileService.nuevoProfile( this.data )
+      .subscribe()
+  })
+}
 }

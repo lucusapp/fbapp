@@ -1,9 +1,19 @@
 export interface Profile{
   nombre:string;
   actividad:string;
-  direccion:string;
   telefono:string;
   email:string;
-  sector:string;
   key$?:string;
-}
+  picture:string;
+  username:string;
+  feed:{
+    title:string;
+    imagen:string;
+    link: string;
+    created_time: string;
+    id:string;
+    description:string
+
+    };
+
+  }

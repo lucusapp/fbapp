@@ -13,7 +13,7 @@
           </div>
         </div>
 
-
+{{this.data.picture.data.url}}
 
 
   <form class="form-inline"[formGroup]="forma" (ngSubmit)="cargarDatos()">
@@ -25,12 +25,13 @@
         </button>
       </div>
 
+<form class="form-inline"[formGroup]="forma" (ngSubmit)="enviar()">
       <div class="input-group col-md-12 top-10">
         <button type="submit" class="btn btn-outline-danger">
           Enviar
         </button>
       </div>
-
+</form>
 
       <div class="input-group col-md-12 top-10">
         <button [routerLink]="['/partners']"
@@ -86,8 +87,68 @@
                    placeholder="correo electrónico"
                    formControlName="email">
              </div>
+
+
+
+
+
+
+
+           <div class="form-group">
+             <label for="profile.categoria">Select:</label>
+             <div class="col-md-6">
+
+             <select class="form-control" id="categoria">
+               <option>Automoción</option>
+               <option>Deportes</option>
+               <option>Moda infantil</option>
+               <option>Moda juvenil</option>
+             </select>
            </div>
-
-
          </div>
+        </div>
       </div>
+    </div>
+
+
+
+    <div class="container top-30">
+      <table class="table">
+        <thead>
+          <tr *ngFor="let cliente of _facebService.clientes">
+            <th>{{i+1}}</th>
+            <th>{{cliente.name}}</th>
+            <th>{{cliente.full_picture}}</th>
+            <th>Username</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </table>
+
+
+
+
+
+
+
+    </div>
+    </form>

@@ -3,6 +3,14 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
+import { environment } from '../environments/environment';
+
+
+
 import { APP_ROUTING } from './app.routes';
 
 
@@ -15,7 +23,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { SearchComponent } from './components/search/search.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
-import { NamePipe } from './pipes/name.pipe';
+import { KeyPipe } from './pipes/key.pipe';
 import { ClienteComponent } from './components/cliente/cliente.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { PartnerComponent } from './components/partners/partner.component';
@@ -27,7 +35,7 @@ import { PartnersComponent } from './components/partners/partners.component';
     HomeComponent,
     SearchComponent,
     NavbarComponent,
-    NamePipe,
+    KeyPipe,
     ClienteComponent,
     FooterComponent,
     PartnerComponent,
@@ -37,6 +45,9 @@ import { PartnersComponent } from './components/partners/partners.component';
   ],
   imports: [
     BrowserModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule, // imports firebase/database, only needed for database features
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
