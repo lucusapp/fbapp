@@ -7,7 +7,8 @@ import 'rxjs/Rx';
 @Injectable()
 export class ProfileService {
 
-profileURL:string = "https://lucusapp-37dfb.firebaseio.com/lucusapp.json"
+profileURL:string = "https://lucusapp-37dfb.firebaseio.com/lucusapp.json";
+perfilURL:string="https://lucusapp-37dfb.firebaseio.com/lucusapp"
 
 
   constructor(private http:Http,
@@ -16,11 +17,26 @@ profileURL:string = "https://lucusapp-37dfb.firebaseio.com/lucusapp.json"
   nuevoProfile(profile:Profile){
 
     let body = JSON.stringify (profile);
-    console.log(body)
+  
     let headers = new Headers({
       'Content-Type':'application/json'
     });
     return this.http.post (this.profileURL, body, {headers:headers})
+      .map(res=>{
+
+        return res.json()
+      });
+
+  }
+
+  actualizarProfile(profile:Profile,key$:string){
+    let url = `${this.profileURL}/${key$}.json`;
+    let body = JSON.stringify (profile);
+    console.log(body)
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    return this.http.post ( url, body, {headers:headers})
       .map(res=>{
 
         return res.json()

@@ -26,8 +26,13 @@ export class PartnerComponent implements OnInit {
 
 cliente:any={};
 
+urlBusqueda:string= "https://graph.facebook.com/v2.8/";
+
 forma:FormGroup;
 public data:any = [];
+
+
+
 
 profile:Profile = {
   nombre:'',
@@ -49,12 +54,19 @@ profile:Profile = {
   }
 
 termino:string = "";
-
+nuevo:boolean=false;
+id:string
 
   constructor(private _facebService:FacebService,
               private _profileService:ProfileService,
               private router: Router,
               private activatedRoute: ActivatedRoute,) {
+
+   this.activatedRoute.params
+        .subscribe(parametros=>{
+          this.id=parametros['id']
+          console.log(parametros)
+        })
 
     this.forma = new FormGroup({
       'nombre': new FormControl('',Validators.required),
@@ -63,6 +75,7 @@ termino:string = "";
       'email':  new FormControl (''),
       'phone': new FormControl (''),
       'sector': new FormControl (''),
+
 
 
 
@@ -85,7 +98,7 @@ ngOnInit() {
       this._facebService.getClientes( this.termino )
       .subscribe (data=>{
         this.data =(data)
-          console.log (this.data)
+          // console.log (this.data)
         })
 };
       cargarDatos(){
@@ -106,22 +119,29 @@ ngOnInit() {
 
 
   enviar(){
-  let envio= new Promise (function(resolve,reject){
-        setTimeout(()=>{
-          console.log('promesaend')
-          resolve();
-        },1500)
-      })
-this._facebService.getClientes( this.termino )
-  .subscribe(data=>{
-    this.data=data
-    console.log(data)
-  })
 
 
-  envio.then(()=>{
+
+    let query = `${ this.termino }?fields=id%2Cname%2Cabout%2Cphone%2Ccategory%2Cusername%2Cemails%2Cfeed%7Bfull_picture%2Cname%2Ccreated_time%2Cmessage%2Cstory%2Cdescription%7D%2Cpicture&access_token=EAAEDPIYZCj7MBANx5YsSRhK4fAQ9NVmp1Fds0GDW1PLZCeOHIXpgRQqLUn5PYnUejUkR8IkyzeNOxLP6ZB8kI4rpGVsEHRhGkEk27UgoFzEJdTwDp7hxF6OIQj9fdZBM1P7sRhAxWioWjFxv2k4h9wpBY6EMPnsZD&jsonp`;
+    let url = this.urlBusqueda + query;
+
+
+fetch(url)
+
+.then(()=>{
+  if(this.id == "nuevo"){
     this._profileService.nuevoProfile( this.data )
-      .subscribe()
-  })
-}
+      .subscribe(data=>{
+        this.router.navigate(['partner', data.name])
+      },
+      error=>console.error())
+  }else{
+    this._profileService.nuevoProfile( this.data )
+      .subscribe(data=>{
+        console.log(data)
+      },
+      error=>console.error())
+      }
+    })
+  }
 }
