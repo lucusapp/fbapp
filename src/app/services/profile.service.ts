@@ -17,7 +17,7 @@ perfilURL:string="https://lucusapp-37dfb.firebaseio.com/lucusapp"
   nuevoProfile(profile:Profile){
 
     let body = JSON.stringify (profile);
-  
+
     let headers = new Headers({
       'Content-Type':'application/json'
     });
@@ -30,12 +30,13 @@ perfilURL:string="https://lucusapp-37dfb.firebaseio.com/lucusapp"
   }
 
   actualizarProfile(profile:Profile,key$:string){
-    let url = `${this.profileURL}/${key$}.json`;
+
     let body = JSON.stringify (profile);
-    console.log(body)
+  
     let headers = new Headers({
       'Content-Type':'application/json'
     });
+    let url = `${this.perfilURL}/${key$}.json`;
     return this.http.post ( url, body, {headers:headers})
       .map(res=>{
 

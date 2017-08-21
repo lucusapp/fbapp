@@ -17,6 +17,7 @@ import { APP_ROUTING } from './app.routes';
 //servicios
 import { FacebService } from './services/faceb.service';
 import { ProfileService } from './services/profile.service';
+import { AuthService} from './services/auth.service';
 
 
 import { AppComponent } from './app.component';
@@ -56,7 +57,9 @@ import { PartnersComponent } from './components/partners/partners.component';
   ],
   providers: [
   FacebService,
-  ProfileService ],
+  ProfileService,
+  AuthService
+ ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

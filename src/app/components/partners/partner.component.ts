@@ -60,9 +60,9 @@ id:string
   constructor(private _facebService:FacebService,
               private _profileService:ProfileService,
               private router: Router,
-              private activatedRoute: ActivatedRoute,) {
+              private route: ActivatedRoute,) {
 
-   this.activatedRoute.params
+   this.route.params
         .subscribe(parametros=>{
           this.id=parametros['id']
           console.log(parametros)
@@ -85,7 +85,7 @@ console.log(this.forma);
 }
 
 ngOnInit() {
-  this.activatedRoute.params.subscribe(params=>{
+  this.route.params.subscribe(params=>{
     // console.log( params['id'] );
     this.cliente = this._facebService.getCliente(params['id']);
     console.log(this.cliente);
@@ -133,12 +133,14 @@ fetch(url)
     this._profileService.nuevoProfile( this.data )
       .subscribe(data=>{
         this.router.navigate(['partner', data.name])
+        console.log('creando')
       },
       error=>console.error())
   }else{
-    this._profileService.nuevoProfile( this.data )
+    this._profileService.actualizarProfile( this.data, this.id )
       .subscribe(data=>{
-        console.log(data)
+        // this.router.navigate(['/partner', data.name])
+        console.log(this.data)
       },
       error=>console.error())
       }

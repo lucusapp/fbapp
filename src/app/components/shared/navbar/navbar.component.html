@@ -21,6 +21,17 @@
 
 <span class="navbar-text"></span>
 
+  <button (click) = "login()"
+          type="button"
+          *ngIf="!auth.isAuthenticated()"
+          class="btn btn-outline-primary">Ingresar</button>
+
+  <button (click) = "salir()"
+          type="button"
+          *ngIf="auth.isAuthenticated()"
+          class="btn btn-outline-primary">Salir</button>
+
+
 
 
   </div>
